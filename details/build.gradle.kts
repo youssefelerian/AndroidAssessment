@@ -1,31 +1,21 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.youssef.assessment"
+    namespace = "com.youssef.details"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.youssef.assessment"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-
-        val assessmentApi: String? by project
-        buildConfigField("String", "ASSESSMENT_API", "\"$assessmentApi\"")
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
-
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -43,7 +33,6 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        buildConfig = true
     }
 }
 
@@ -56,11 +45,18 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.recyclerview)
     implementation(libs.cardview)
-
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     //Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // retrofit
+    implementation(libs.retrofit)
+
+    //gson
+    implementation(libs.gson)
 
     //dagger
     kapt(libs.dagger.compiler)
@@ -69,23 +65,10 @@ dependencies {
     implementation(libs.dagger.android)
     implementation(libs.dagger.android.support)
 
-    //gson
-    implementation(libs.gson)
-
-    //room
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    kapt(libs.room.compiler)
-
-
     //navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
     //modules
     implementation(project(":core"))
-    implementation(project(":list"))
-    implementation(project(":details"))
-
-
 }
