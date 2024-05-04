@@ -11,6 +11,7 @@ import com.youssef.core.presentation.view.BaseFragment
 import com.youssef.core.presentation.viewmodel.AssessmentViewModelFactory
 import com.youssef.details.R
 import com.youssef.details.databinding.FragmentUniversityDetailsBinding
+import com.youssef.details.domain.entity.UniversityDetailsEntity
 import com.youssef.details.presentation.viewmodel.UniversityDetailsViewModel
 import javax.inject.Inject
 
@@ -31,15 +32,14 @@ class UniversityDetailsFragment : BaseFragment<FragmentUniversityDetailsBinding>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observations()
-
+        viewModel.getUniversityDetails("Mohamed bin Zayed University of Artificial Intelligence (MBZUAI)")
     }
 
     private fun observations() {
         viewModel.getUniversityLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is ViewState.SuccessState -> {
-                    hideProgress()
-
+                    getUniversityDetailsSuccess(state.data)
                 }
 
                 is ViewState.LoadingState -> {
@@ -53,6 +53,14 @@ class UniversityDetailsFragment : BaseFragment<FragmentUniversityDetailsBinding>
             }
         }
 
+    }
+
+    private fun getUniversityDetailsSuccess(entity: UniversityDetailsEntity) {
+        hideProgress()
+        binding.universityNameTv.text = entity.name
+        binding.universityDescTv.text = entity.country
+        binding.universityDomainsTv.text = entity.getDomainsString()
+        binding.universityWebPagesTv.text = entity.getWebPagesString()
     }
 
     private fun getUniversityDetailsError() {

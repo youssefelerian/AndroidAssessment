@@ -1,8 +1,10 @@
 package com.youssef.details.di
 
 
+import com.youssef.core.data.database.local.AssessmentDao
 import com.youssef.details.data.repository.UniversityDetailsRepositoryImpl
 import com.youssef.details.data.source.local.UniversityDetailsLocalDS
+import com.youssef.details.data.source.local.UniversityDetailsLocalImpl
 import com.youssef.details.domain.repository.UniversityDetailsRepository
 import dagger.Module
 import dagger.Provides
@@ -16,6 +18,12 @@ import dagger.Provides
 
 @Module
 class UniversityDetailsModule {
+
+    @UniversityDetailsScope
+    @Provides
+    fun provideUniversityDetailsLocalDS(
+        assessmentDao: AssessmentDao
+    ): UniversityDetailsLocalDS = UniversityDetailsLocalImpl(assessmentDao)
 
     @UniversityDetailsScope
     @Provides

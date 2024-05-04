@@ -5,8 +5,8 @@ import com.youssef.core.domain.entity.ErrorEntity
 import com.youssef.core.domain.entity.Outcome
 import com.youssef.details.data.source.local.UniversityDetailsLocalDS
 import com.youssef.details.di.UniversityDetailsScope
-import com.youssef.details.domain.repository.UniversityDetailsRepository
 import com.youssef.details.domain.entity.UniversityDetailsEntity
+import com.youssef.details.domain.repository.UniversityDetailsRepository
 import javax.inject.Inject
 
 
@@ -18,7 +18,7 @@ class UniversityDetailsRepositoryImpl @Inject constructor(
     override suspend fun getUniversityDetails(name: String): Outcome<UniversityDetailsEntity> {
         return try {
             Outcome.success(universityDetailsLocalDS.getUniversityDetails(name))
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Outcome.error(ErrorEntity(e, NOT_FOUND))
         }
 
