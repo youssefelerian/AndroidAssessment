@@ -3,8 +3,9 @@ package com.youssef.assessment.di
 import android.app.Application
 import android.content.Context
 import com.youssef.assessment.BuildConfig
-import com.youssef.core.database.local.AssessmentDatabase
-import com.youssef.core.network.NetworkHandler
+import com.youssef.core.data.database.local.AssessmentDao
+import com.youssef.core.data.database.local.AssessmentDatabase
+import com.youssef.core.data.network.NetworkHandler
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -29,7 +30,13 @@ class AppModule {
         NetworkHandler.request.setup(BuildConfig.ASSESSMENT_API, BuildConfig.DEBUG)
 
     @Provides
-    fun providesCitiesDatabase(context: Application): AssessmentDatabase =
+    @Singleton
+    fun providesAssessmentDatabase(context: Application): AssessmentDatabase =
         AssessmentDatabase.build(context)
+
+    @Provides
+    @Singleton
+    fun providesAssessmentDao(assessmentDatabase: AssessmentDatabase): AssessmentDao =
+        assessmentDatabase.getAssessmentDao()
 }
 

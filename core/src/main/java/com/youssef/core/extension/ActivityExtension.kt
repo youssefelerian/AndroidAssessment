@@ -27,7 +27,7 @@ fun AlertDialog.Builder.createConfirmAlert(
 }
 
 fun AlertDialog.Builder.createErrorAlert(
-    message: String,
+    message: String = context.getString(R.string.error_network_message),
     positiveListener: View.OnClickListener? = null
 ): Dialog {
     return createCustomAlert(
