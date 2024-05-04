@@ -1,0 +1,4 @@
+<resources>
+
+    <string name="no_local_data_found_message">No local data found.</string>
+</resources>

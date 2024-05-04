@@ -1,7 +1,9 @@
 package com.youssef.assessment
 
 import android.os.Bundle
+import androidx.core.net.toUri
 import androidx.navigation.NavController
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.NavHostFragment
 import com.youssef.assessment.databinding.ActivityMainBinding
 import dagger.android.support.DaggerAppCompatActivity
@@ -23,6 +25,10 @@ class MainActivity : DaggerAppCompatActivity() {
         val view = binding.root
         setContentView(view)
         setupGraph()
+        val request = NavDeepLinkRequest.Builder
+            .fromUri("android-app://assessment.youssef.app/details".toUri())
+            .build()
+        navController.navigate(request)
     }
 
     private fun setupGraph() {

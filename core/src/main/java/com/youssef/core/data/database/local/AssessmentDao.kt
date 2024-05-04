@@ -19,6 +19,9 @@ interface AssessmentDao {
     @Query("SELECT * FROM universities WHERE searchName= :searchName")
     suspend fun getAllUniversities(searchName: String): List<UniversitiesDto>
 
+    @Transaction
+    @Query("SELECT * FROM universities WHERE name= :name")
+    suspend fun getUniversityDetails(name: String): UniversitiesDto
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUniversityList(universities: List<UniversitiesDto>)

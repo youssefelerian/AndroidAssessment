@@ -2,6 +2,7 @@ package com.youssef.assessment.di
 
 
 import com.youssef.assessment.MainActivity
+import com.youssef.details.di.UniversityDetailsFragmentModule
 import com.youssef.list.di.UniversityListFragmentModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -15,7 +16,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivitiesModule {
 
-    @ContributesAndroidInjector(modules = [UniversityListFragmentModule::class])
+    @ContributesAndroidInjector(modules = [UniversityListFragmentModule::class, UniversityDetailsFragmentModule::class])
     abstract fun contributeMainActivityAndroidInjector(): MainActivity
 
 

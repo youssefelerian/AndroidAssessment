@@ -19,3 +19,4 @@ rootProject.name = "AndroidAssessment"
 include(":app")
 include(":core")
 include(":list")
+include(":details")

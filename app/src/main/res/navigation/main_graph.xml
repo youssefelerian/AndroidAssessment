@@ -6,4 +6,6 @@
 
     <include app:graph="@navigation/university_list_graph" />
 
+    <include app:graph="@navigation/university_details_graph" />
+
 </navigation>
