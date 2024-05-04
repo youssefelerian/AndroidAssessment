@@ -1,4 +1,5 @@
 <resources>
     <string name="dialog_no">No</string>
     <string name="dialog_ok">Ok</string>
+    <string name="error_network_message">No internet connection. Please connect to the internet and try again.</string>
 </resources>

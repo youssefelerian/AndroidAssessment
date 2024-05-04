@@ -30,7 +30,7 @@ class MainActivity : DaggerAppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.navigationHost) as NavHostFragment
         navController = navHost.navController
         val inflater = navController.navInflater
-        val graph = inflater.inflate(com.youssef.list.R.navigation.university_list_graph)
+        val graph = inflater.inflate(R.navigation.main_graph)
         navController.setGraph(graph, null)
     }
 }
