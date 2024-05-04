@@ -1,4 +1,4 @@
-package com.youssef.assessment.di
+package com.youssef.core.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

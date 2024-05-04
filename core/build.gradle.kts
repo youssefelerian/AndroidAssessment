@@ -40,12 +40,10 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // retrofit
-    val retrofit = "2.11.0"
-    implementation("com.squareup.retrofit2:retrofit:$retrofit")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofit")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofit")
-    implementation("com.squareup.retrofit2:converter-scalars:$retrofit")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.converter.scalars)
+    implementation(libs.logging.interceptor)
 
     //room
     implementation(libs.room.runtime)

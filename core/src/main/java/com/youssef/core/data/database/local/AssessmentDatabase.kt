@@ -1,4 +1,4 @@
-package com.youssef.core.database.local
+package com.youssef.core.data.database.local
 
 import android.app.Application
 import androidx.room.Database
