@@ -12,15 +12,16 @@ class UniversityListViewModel @Inject constructor(
     private val getUniversityListUseCase: GetUniversityListUseCase
 ) : BaseViewModel() {
 
-    val liveData = MutableStateLiveData<List<UniversityEntity>>()
+    val getUniversityLiveData = MutableStateLiveData<List<UniversityEntity>>()
     fun getUniversityList(searchName: String = "United Arab Emirates") {
+        getUniversityLiveData.postValue(ViewState.loading())
         execute {
             getUniversityListUseCase.execute(searchName, success = {
-                liveData.postValue(ViewState.success(it))
+                getUniversityLiveData.postValue(ViewState.success(it))
             }, error = {
-                liveData.postValue(ViewState.error(it.throwable.message ?: "", ""))
+                getUniversityLiveData.postValue(ViewState.error(it.throwable.message ?: "", ""))
             }, empty = {
-                liveData.postValue(ViewState.empty())
+                getUniversityLiveData.postValue(ViewState.empty())
             })
         }
     }

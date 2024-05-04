@@ -31,7 +31,12 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providesCitiesDatabase(context: Application): AssessmentDao =
-        AssessmentDatabase.build(context).getAssessmentDao()
+    fun providesAssessmentDatabase(context: Application): AssessmentDatabase =
+        AssessmentDatabase.build(context)
+
+    @Provides
+    @Singleton
+    fun providesAssessmentDao(assessmentDatabase: AssessmentDatabase): AssessmentDao =
+        assessmentDatabase.getAssessmentDao()
 }
 

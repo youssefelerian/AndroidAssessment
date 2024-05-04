@@ -74,9 +74,18 @@ dependencies {
 
     //room
     implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
+
+
+    //navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     //modules
     implementation(project(":core"))
     implementation(project(":list"))
+
+
 
 }

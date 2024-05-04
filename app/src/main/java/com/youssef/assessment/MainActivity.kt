@@ -1,6 +1,8 @@
 package com.youssef.assessment
 
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.youssef.assessment.databinding.ActivityMainBinding
 import dagger.android.support.DaggerAppCompatActivity
 
@@ -13,11 +15,22 @@ import dagger.android.support.DaggerAppCompatActivity
 class MainActivity : DaggerAppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setupGraph()
+    }
+
+    private fun setupGraph() {
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.navigationHost) as NavHostFragment
+        navController = navHost.navController
+        val inflater = navController.navInflater
+        val graph = inflater.inflate(com.youssef.list.R.navigation.university_list_graph)
+        navController.setGraph(graph, null)
     }
 }

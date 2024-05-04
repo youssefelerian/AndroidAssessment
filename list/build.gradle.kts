@@ -46,6 +46,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.recyclerview)
     implementation(libs.cardview)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     //Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -58,9 +60,15 @@ dependencies {
     implementation(libs.gson)
 
     //dagger
+    kapt(libs.dagger.compiler)
+    kapt(libs.dagger.android.processor)
     implementation(libs.dagger)
     implementation(libs.dagger.android)
     implementation(libs.dagger.android.support)
+
+    //navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     //modules
     implementation(project(":core"))
