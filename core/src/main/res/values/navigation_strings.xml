@@ -1,0 +1,4 @@
+<resources>
+    <string name="list_module" translatable="false">android-app://assessment.youssef.app/list</string>
+    <string name="details_module" translatable="false">android-app://assessment.youssef.app/details/{name}</string>
+</resources>
