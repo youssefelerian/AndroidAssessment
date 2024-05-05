@@ -9,6 +9,8 @@ and Kotlin Flows.
 
 ## Libraries Used
 * App modularization
+* Android Jetpack's Navigation component
+*  Android Jetpack's Room
 * Coroutines Library support for Kotlin coroutines.
 * Flows Stream processing API, built on top of Coroutines.
 * Dagger2 Dependency injection library for Android.
