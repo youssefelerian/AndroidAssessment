@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.youssef.core.extension.createErrorAlert
+import com.youssef.core.navigation.DeeplinkHandler
+import com.youssef.core.navigation.model.DetailsNavigation
 import com.youssef.core.presentation.uimodel.ViewState
 import com.youssef.core.presentation.view.BaseFragment
 import com.youssef.core.presentation.viewmodel.AssessmentViewModelFactory
@@ -25,8 +28,15 @@ class UniversityListFragment : BaseFragment<FragmentUniversityListBinding>() {
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[UniversityListViewModel::class.java]
     }
-    private val adapter = UniversityAdapter {
 
+    @Inject
+    lateinit var deeplinkHandler: DeeplinkHandler
+
+    private val adapter = UniversityAdapter {
+        deeplinkHandler.process(
+            DetailsNavigation().build(requireContext(), it.name),
+            findNavController()
+        )
     }
 
     override fun bindView(layoutInflater: LayoutInflater) =

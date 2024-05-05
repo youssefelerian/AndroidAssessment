@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.youssef.core.extension.createErrorAlert
+import com.youssef.core.navigation.model.DetailsNavigation
 import com.youssef.core.presentation.uimodel.ViewState
 import com.youssef.core.presentation.view.BaseFragment
 import com.youssef.core.presentation.viewmodel.AssessmentViewModelFactory
@@ -32,7 +33,9 @@ class UniversityDetailsFragment : BaseFragment<FragmentUniversityDetailsBinding>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observations()
-        viewModel.getUniversityDetails("Mohamed bin Zayed University of Artificial Intelligence (MBZUAI)")
+        arguments?.getString(DetailsNavigation().paramName)?.let {
+            viewModel.getUniversityDetails(it)
+        }
     }
 
     private fun observations() {

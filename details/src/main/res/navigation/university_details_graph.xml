@@ -9,7 +9,12 @@
         android:id="@+id/fragment_university_details"
         android:name="com.youssef.details.presentation.view.UniversityDetailsFragment"
         tools:layout="@layout/fragment_university_details">
-        <deepLink app:uri="android-app://assessment.youssef.app/details" />
+        <deepLink app:uri="@string/details_module" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="false" />
+
     </fragment>
 
 </navigation>

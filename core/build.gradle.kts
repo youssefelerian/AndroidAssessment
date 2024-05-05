@@ -55,10 +55,17 @@ dependencies {
     kapt(libs.room.compiler)
 
 
+    //navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+
     //gson
     implementation(libs.gson)
 
     //dagger
+    kapt(libs.dagger.compiler)
+    kapt(libs.dagger.android.processor)
     implementation(libs.dagger)
     implementation(libs.dagger.android)
     implementation(libs.dagger.android.support)
