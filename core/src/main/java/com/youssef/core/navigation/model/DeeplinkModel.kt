@@ -21,6 +21,7 @@ class DetailsNavigation : DeeplinkModel {
 
 class ListNavigation : DeeplinkModel {
     override val navigationName: String = "list"
+    val paramName = "refresh"
     override fun build(context: Context, param: String): Uri {
         return Uri.parse(context.getString(R.string.list_module))
     }

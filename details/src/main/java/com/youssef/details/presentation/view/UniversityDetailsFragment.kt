@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.youssef.core.extension.createErrorAlert
 import com.youssef.core.navigation.model.DetailsNavigation
+import com.youssef.core.navigation.model.ListNavigation
 import com.youssef.core.presentation.uimodel.ViewState
 import com.youssef.core.presentation.view.BaseFragment
 import com.youssef.core.presentation.viewmodel.AssessmentViewModelFactory
@@ -26,6 +28,8 @@ class UniversityDetailsFragment : BaseFragment<FragmentUniversityDetailsBinding>
         ViewModelProvider(this, viewModelFactory)[UniversityDetailsViewModel::class.java]
     }
 
+    private val navController by lazy { findNavController() }
+
     override fun bindView(layoutInflater: LayoutInflater) =
         FragmentUniversityDetailsBinding.inflate(layoutInflater)
 
@@ -33,8 +37,19 @@ class UniversityDetailsFragment : BaseFragment<FragmentUniversityDetailsBinding>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observations()
+        actions()
         arguments?.getString(DetailsNavigation().paramName)?.let {
             viewModel.getUniversityDetails(it)
+        }
+    }
+
+    private fun actions() {
+        binding.closeWithRefresh.setOnClickListener {
+            navController.previousBackStackEntry?.savedStateHandle?.set(
+                ListNavigation().paramName,
+                true
+            )
+            navController.popBackStack()
         }
     }
 
