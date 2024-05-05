@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.youssef.core.extension.createErrorAlert
+import com.youssef.core.navigation.DeeplinkHandler
+import com.youssef.core.navigation.model.DetailsNavigation
+import com.youssef.core.navigation.model.ListNavigation
 import com.youssef.core.presentation.uimodel.ViewState
 import com.youssef.core.presentation.view.BaseFragment
 import com.youssef.core.presentation.viewmodel.AssessmentViewModelFactory
@@ -25,8 +29,17 @@ class UniversityListFragment : BaseFragment<FragmentUniversityListBinding>() {
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[UniversityListViewModel::class.java]
     }
-    private val adapter = UniversityAdapter {
 
+    private val navController by lazy { findNavController() }
+
+    @Inject
+    lateinit var deeplinkHandler: DeeplinkHandler
+
+    private val adapter = UniversityAdapter {
+        deeplinkHandler.process(
+            DetailsNavigation().build(requireContext(), it.name),
+            navController
+        )
     }
 
     override fun bindView(layoutInflater: LayoutInflater) =
@@ -46,6 +59,13 @@ class UniversityListFragment : BaseFragment<FragmentUniversityListBinding>() {
     }
 
     private fun observations() {
+        savedStateHandle()?.getLiveData<Boolean>(ListNavigation().paramName)
+            ?.observe(viewLifecycleOwner) { isRefresh ->
+                if (isRefresh)
+                    viewModel.getUniversityList()
+                //remove after refresh to not observe again
+                savedStateHandle()?.remove<Boolean>(ListNavigation().paramName)
+            }
         viewModel.getUniversityLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is ViewState.SuccessState -> {
@@ -68,6 +88,8 @@ class UniversityListFragment : BaseFragment<FragmentUniversityListBinding>() {
         }
 
     }
+
+    private fun savedStateHandle() = navController.currentBackStackEntry?.savedStateHandle
 
     private fun getUniversityListEmpty() {
         hideProgress()

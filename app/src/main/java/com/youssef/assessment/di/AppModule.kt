@@ -3,9 +3,12 @@ package com.youssef.assessment.di
 import android.app.Application
 import android.content.Context
 import com.youssef.assessment.BuildConfig
+import com.youssef.assessment.navigation.RootDeeplinkHandler
 import com.youssef.core.data.database.local.AssessmentDao
 import com.youssef.core.data.database.local.AssessmentDatabase
 import com.youssef.core.data.network.NetworkHandler
+import com.youssef.core.navigation.DeeplinkHandler
+import com.youssef.core.navigation.DeeplinkProcessor
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -38,5 +41,12 @@ class AppModule {
     @Singleton
     fun providesAssessmentDao(assessmentDatabase: AssessmentDatabase): AssessmentDao =
         assessmentDatabase.getAssessmentDao()
+
+    @Provides
+    @Singleton
+    fun providesRootDeeplinkHandler(processors: Set<@JvmSuppressWildcards DeeplinkProcessor>): DeeplinkHandler =
+        RootDeeplinkHandler(processors)
+
+
 }
 
